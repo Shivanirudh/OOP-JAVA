@@ -158,6 +158,7 @@ public class TestInheritance{
 		System.out.print("Enter total marks: ");totalmark=in.nextFloat();
 		in.nextLine();
 		Student s=new Student(aadhaar,name,address,gender,program,year,totalmark);
+		s.setYear(year);s.setAddress(address);s.setTotal(totalmark);
 		
 		System.out.println("Enter Faculty Details: ");
 		System.out.print("Enter name: ");name=in.nextLine();
@@ -171,6 +172,7 @@ public class TestInheritance{
 		System.out.print("Enter basic pay: ");basicpay=in.nextDouble();
 		
 		Faculty f=new Faculty(aadhaar,name,address,gender,designation,department,basicpay);
+		f.setDesig(designation);f.setBasic(basicpay);
 		
 		System.out.println("Student Details: ");
 		System.out.println("Name: "+s.getName());

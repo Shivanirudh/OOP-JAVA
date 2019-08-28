@@ -1,5 +1,5 @@
 import java.util.Scanner;
-class Shape{
+abstract class Shape{
 	protected String color;
 	
 	public Shape(){
@@ -18,9 +18,18 @@ class Shape{
 		this.color=color;
 	}
 	
+	abstract double getArea();
+	
+	abstract double getPerimeter();
 }
 
-class Circle extends Shape{
+interface Common{
+	abstract double getArea();
+	
+	abstract double getPerimeter();
+}
+
+class Circle extends Shape implements Common{
 	protected double radius;
 	
 	public Circle(){
@@ -32,8 +41,8 @@ class Circle extends Shape{
 	}
 	
 	public Circle(double radius, String color){
-		super(color);
 		this.radius=radius;
+		this.color=color;
 	}
 	
 	public double getRadius(){
@@ -45,15 +54,15 @@ class Circle extends Shape{
 	}
 	
 	public double getArea(){
-		return (double)3.14*radius*radius;
+		return (float)3.14*radius*radius;
 	}
 	
 	public double getPerimeter(){
-		return (double)2*3.14*radius;
+		return (float)2*3.14*radius;
 	}
 }
 
-class Rectangle extends Shape{
+class Rectangle extends Shape implements Common{
 	protected double width;
 	protected double length;
 	
@@ -94,7 +103,7 @@ class Rectangle extends Shape{
 	}
 	
 	public double getArea(){
-		return (double)width*length;
+		return (float)width*length;
 	}
 	
 	public double getPerimeter(){
@@ -125,9 +134,18 @@ class Square extends Rectangle{
 	public void setSide(double side){
 		this.side=side;
 	}
+	
+	public double getArea(){
+		return side*side;
+	}
+	
+	public double getPerimeter(){
+		return side*4;
+	}
+	
 }
 
-public class TestShape{
+public class TestInterface{
 	public static void main(String args[]){
 		String color;
 		double radius;
@@ -142,8 +160,7 @@ public class TestShape{
 		System.out.print("Enter radius of Circle: ");
 		radius=in.nextDouble();
 		in.nextLine();
-		Circle c=new Circle(radius,color);
-		c.setRadius(radius);c.setColor(color);
+		Circle c=new Circle(radius,color);	
 		
 		System.out.print("Enter color of Rectangle: ");
 		color=in.nextLine();
@@ -158,23 +175,13 @@ public class TestShape{
 		color=in.nextLine();
 		System.out.print("Enter side of Square: ");
 		side=in.nextDouble();
+		
 		Square s=new Square(side,color);
 		
-		System.out.println();
-		
-		System.out.println("Colour of Circle:"+c.getColor());
 		System.out.println("Area of Circle :"+c.getArea());
 		System.out.println("Perimeter of Circle :"+c.getPerimeter());
-		System.out.println();
-		
-		System.out.println("Colour of Rectangle:"+r.getColor());
-		System.out.println("Length of Rectangle :"+r.getLength());
-		System.out.println("Width of Rectangle :"+r.getWidth());
 		System.out.println("Area of Rectangle :"+r.getArea());
 		System.out.println("Perimeter of Rectangle :"+r.getPerimeter());
-		System.out.println();
-
-		System.out.println("Colour of Square:"+s.getColor());
 		System.out.println("Area of Square :"+s.getSide()*s.getSide());
 		System.out.println("Perimeter of Square :"+4*s.getSide());
 	}
@@ -185,22 +192,14 @@ Output:
 Enter color of Circle: red
 Enter radius of Circle: 5
 Enter color of Rectangle: blue
-Enter width of Rectangle: 6
-Enter length of Rectangle: 4
+Enter width of Rectangle: 5
+Enter length of Rectangle: 6
 Enter color of Square: green
-Enter side of Square: 7
-
-Color of Circle :red
-Area of Circle :78.5
+Enter side of Square: 5
+Area of Circle :78.50000262260437
 Perimeter of Circle :31.400000000000002
-
-Color of Rectangle :blue
-Length of Rectangle :6.0
-Width of Rectangle :4.0
-Area of Rectangle :24.0
-Perimeter of Rectangle :20.0
-
-Color of Square :green
-Area of Square :49.0
-Perimeter of Square :28.0
+Area of Rectangle :30.0
+Perimeter of Rectangle :22.0
+Area of Square :25.0
+Perimeter of Square :20.0
 */
